@@ -15,13 +15,19 @@ export default class User extends BaseModel {
   public sexo: string
 
   @column()
-  public birth_date: DateTime
+  public birth_date: Date
 
   @column()
   public email: string
 
   @column()
   public type: 'user' | 'admin'
+
+  @column()
+  public cpf: string
+
+  @column()
+  public password: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
