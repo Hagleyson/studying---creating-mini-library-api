@@ -5,3 +5,6 @@ export type TUser = {
   ctx: HttpContextContract
   body: UserDTO
 }
+export type TDeleteUser = {
+  secureId: string
+}

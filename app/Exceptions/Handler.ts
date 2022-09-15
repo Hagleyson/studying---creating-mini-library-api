@@ -27,6 +27,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
         message: error.message,
       })
     }
+
     return super.handle(error, ctx)
   }
 }
