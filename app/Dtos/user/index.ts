@@ -1,6 +1,7 @@
 export interface UserDTO {
   name: string
   last_name: string
+  user_name: string
   sexo: string
   password: string
   birth_date: Date
