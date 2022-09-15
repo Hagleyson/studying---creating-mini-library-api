@@ -6,4 +6,8 @@ export default class SessionsController {
     const { email, password } = ctx.request.body()
     return new CreateSessionService().execute({ ctx, body: { email, password } })
   }
+  public async destroy({ response, auth }: HttpContextContract) {
+    const teste = await auth.logout()
+    return response.ok({ teste })
+  }
 }
