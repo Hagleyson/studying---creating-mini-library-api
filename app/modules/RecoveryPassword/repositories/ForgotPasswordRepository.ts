@@ -1,17 +1,19 @@
 import { Exception } from '@adonisjs/core/build/standalone'
-import { TSessionDTO } from '../type'
+import { TForgotPassword } from '../type'
 import User from 'App/Models/User'
-import { ForgotPasswordValidator } from 'App/Validators/index'
+import Database from '@ioc:Adonis/Lucid/Database'
+
 import util from 'util'
 import { randomBytes } from 'crypto'
 import Mail from '@ioc:Adonis/Addons/Mail'
 import NotFoundException from 'App/Exceptions/NotFoundException'
 export class ForgotPasswordRepository {
-  public async handle({ ctx, body }: TSessionDTO) {
+  public async handle({ ctx, body }: TForgotPassword) {
     const { email, url } = body
-    console.log(email)
+
     try {
       const user = await User.findBy('email', email)
+
       if (!user) {
         throw new NotFoundException('There is no user for this email', 404, 'E_NOT_FOUND')
       }

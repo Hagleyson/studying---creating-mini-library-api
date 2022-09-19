@@ -1,7 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { ForgotDTO } from 'App/Dtos'
+import { ForgotDTO, ResetPasswordDTO } from 'App/Dtos'
 
-export type TSessionDTO = {
+export type TForgotPassword = {
   ctx: HttpContextContract
   body: ForgotDTO
+}
+
+export type TRecoveryPassword = {
+  ctx: HttpContextContract
+  body: ResetPasswordDTO
 }
