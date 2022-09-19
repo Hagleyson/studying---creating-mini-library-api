@@ -1,7 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, beforeSave, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  column,
+  beforeSave,
+  beforeCreate,
+  hasMany,
+  HasMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { v4 as uuidV4 } from 'uuid'
+import LinkToken from './LinkTokenUser'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -41,6 +49,9 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => LinkToken, { foreignKey: 'userId' })
+  public tokens: HasMany<typeof LinkToken>
 
   @beforeCreate()
   public static async CreateUUID(model: User): Promise<void> {

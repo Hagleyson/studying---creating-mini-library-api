@@ -5,3 +5,4 @@ Route.get('/', async () => {
 })
 import './sessions/index'
 import './user/index'
+import './password/index'
