@@ -6,13 +6,12 @@ import {
   beforeCreate,
   hasMany,
   HasMany,
-  manyToMany,
-  ManyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { v4 as uuidV4 } from 'uuid'
 import LinkToken from './LinkTokenUser'
 import Book from './Book'
+import LoanBook from './LoanBook'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -56,8 +55,8 @@ export default class User extends BaseModel {
   @hasMany(() => LinkToken, { foreignKey: 'userId' })
   public tokens: HasMany<typeof LinkToken>
 
-  @manyToMany(() => Book, { pivotTable: 'book_reservations' })
-  public groups: ManyToMany<typeof Book>
+  @hasMany(() => LoanBook, { foreignKey: 'userId' })
+  public user: HasMany<typeof LoanBook>
 
   @beforeCreate()
   public static async CreateUUID(model: User): Promise<void> {

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('actor')
       table.string('edition')
-      table.string('code')
+      table.string('code').unique()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

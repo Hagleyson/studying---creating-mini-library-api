@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeCreate, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuidV4 } from 'uuid'
-import User from './User'
+
+import LoanBook from './LoanBook'
 
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
@@ -19,11 +20,11 @@ export default class Book extends BaseModel {
   @column()
   public code: string
 
+  @hasMany(() => LoanBook, { foreignKey: 'bookId' })
+  public book: HasMany<typeof LoanBook>
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
-
-  @manyToMany(() => User, { pivotTable: 'book_reservations' })
-  public players: ManyToMany<typeof User>
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
