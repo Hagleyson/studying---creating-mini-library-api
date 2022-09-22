@@ -5,8 +5,7 @@ import { TCreateAndUpdateBook } from '../type'
 export class CreateBookRepository {
   public async handle({ ctx, body }: TCreateAndUpdateBook) {
     try {
-      await Book.create({ ...body })
-      return body
+      return await Book.create({ ...body })
     } catch (error) {
       throw new Exception(
         error.message || 'Internal Server Error',

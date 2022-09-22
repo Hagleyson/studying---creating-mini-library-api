@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('secure_id').unique().notNullable()
       table.string('status').notNullable().defaultTo('active')
+      table.date('closing_date').notNullable()
       table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
       table
         .integer('book_id')
@@ -16,7 +17,6 @@ export default class extends BaseSchema {
         .inTable('books')
         .onDelete('CASCADE')
         .notNullable()
-
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

@@ -1,3 +1,4 @@
+import { BookDTO } from 'App/Dtos'
 import {
   ListAllBooksService,
   DeleteBookService,
@@ -22,8 +23,8 @@ export default class BooksController {
     })
   }
   public async store(ctx: HttpContextContract) {
-    const { name, actor, edition, code, genre } = ctx.request.body()
-    return new CreateBookService().execute({ ctx, body: { name, actor, edition, code, genre } })
+    const body = ctx.request.body() as BookDTO
+    return new CreateBookService().execute({ ctx, body })
   }
   public async update(ctx: HttpContextContract) {
     const { name, actor, edition, genre } = ctx.request.body()

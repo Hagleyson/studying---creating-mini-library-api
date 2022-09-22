@@ -12,10 +12,19 @@ export default class LoanBook extends BaseModel {
   public secure_id: string
 
   @column()
+  public closing_date: Date
+
+  @column()
   public status: 'active' | 'inactive'
+
+  @column({ columnName: 'user_id' })
+  public userId: number
 
   @belongsTo(() => User, { foreignKey: 'userId' })
   public user: BelongsTo<typeof User>
+
+  @column({ columnName: 'book_id' })
+  public bookId: number
 
   @belongsTo(() => Book, { foreignKey: 'bookId' })
   public book: BelongsTo<typeof Book>
