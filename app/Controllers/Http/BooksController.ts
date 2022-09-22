@@ -1,4 +1,5 @@
 import {
+  ListAllBooksService,
   DeleteBookService,
   UpdateBookService,
   CreateBookService,
@@ -7,6 +8,19 @@ import {
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class BooksController {
+  public async index(ctx: HttpContextContract) {
+    const { name, actor, edition, code, genre, page, perPage, noPaginate } = ctx.request.qs()
+    return new ListAllBooksService().execute({
+      name,
+      actor,
+      edition,
+      code,
+      genre,
+      page,
+      perPage,
+      noPaginate,
+    })
+  }
   public async store(ctx: HttpContextContract) {
     const { name, actor, edition, code, genre } = ctx.request.body()
     return new CreateBookService().execute({ ctx, body: { name, actor, edition, code, genre } })

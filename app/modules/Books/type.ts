@@ -9,3 +9,8 @@ export type TCreateAndUpdateBook = {
 export type TDeleteBook = {
   secureId: string
 }
+export type TListAllBooks = {
+  noPaginate?: boolean
+  page: number
+  perPage: number
+} & BookDTO
