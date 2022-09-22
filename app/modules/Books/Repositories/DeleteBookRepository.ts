@@ -1,18 +1,16 @@
 import { Exception } from '@adonisjs/core/build/standalone'
 import NotFoundException from 'App/Exceptions/NotFoundException'
 import Book from 'App/Models/Book'
-import { TCreateAndUpdateBook } from '../type'
+import { TDeleteBook } from '../type'
 
-export class UpdateBookRepository {
-  public async handle({ ctx, body }: TCreateAndUpdateBook) {
-    const { name, actor, edition, code } = body
+export class DeleteBookRepository {
+  public async handle({ secureId }: TDeleteBook) {
     try {
-      const bookSecureId = ctx.request.param('secure_id')
-      const book = await Book.findBy('secure_id', bookSecureId)
+      const book = await Book.findBy('secure_id', secureId)
       if (!book) {
         throw new NotFoundException('There is no book for this secure id', 404, 'E_NOT_FOUND')
       }
-      book.merge({ name, actor, edition, code })
+      book.delete()
       await book.save()
       return book
     } catch (error) {

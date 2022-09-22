@@ -1,5 +1,9 @@
-import { UpdateBookService } from './../../modules/Books/service/UpdateBookService'
-import { CreateBookService } from './../../modules/Books/service/CreateBookService'
+import {
+  DeleteBookService,
+  UpdateBookService,
+  CreateBookService,
+} from './../../modules/Books/service/index'
+
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class BooksController {
@@ -10,5 +14,9 @@ export default class BooksController {
   public async update(ctx: HttpContextContract) {
     const { name, actor, edition } = ctx.request.body()
     return new UpdateBookService().execute({ ctx, body: { name, actor, edition } })
+  }
+  public async destroy(ctx: HttpContextContract) {
+    const secureId = ctx.request.param('secure_id')
+    return new DeleteBookService().execute({ secureId })
   }
 }

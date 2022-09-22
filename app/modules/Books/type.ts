@@ -5,3 +5,7 @@ export type TCreateAndUpdateBook = {
   ctx: HttpContextContract
   body: BookDTO
 }
+
+export type TDeleteBook = {
+  secureId: string
+}

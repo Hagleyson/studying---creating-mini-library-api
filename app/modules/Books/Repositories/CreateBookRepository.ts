@@ -8,7 +8,7 @@ export class CreateBookRepository {
 
     try {
       await Book.create({ name, actor, edition, code })
-      return ctx.response.ok({ body })
+      return body
     } catch (error) {
       throw new Exception(
         error.message || 'Internal Server Error',
