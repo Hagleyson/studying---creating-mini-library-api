@@ -13,15 +13,12 @@ export class UpdateUserRepository {
       if (!user) {
         throw new NotFoundException('There is no user for this secure id', 404, 'E_NOT_FOUND')
       }
+      let newUser = { ...body }
+      if (body.birth_date) {
+        newUser = { ...newUser, birth_date: moment(body.birth_date, 'DD/MM/YYYY').toDate() }
+      }
       user.merge({
-        name: body.name,
-        last_name: body.last_name,
-        sexo: body.sexo,
-        birth_date: moment(body.birth_date, 'DD/MM/YYYY').toDate(),
-        type: body.type,
-        email: body.email,
-        cpf: body.cpf,
-        user_name: body.user_name,
+        ...newUser,
       })
       await user.save()
       return user
