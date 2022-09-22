@@ -1,19 +1,19 @@
 import { validator } from '@ioc:Adonis/Core/Validator'
 
-import { CustomMessages, CreateBookValidator } from 'App/Validators/index'
+import { CustomMessages, UpdateBookValidator } from 'App/Validators/index'
 
-import { CreateBookRepository } from '../Repositories/index'
+import { UpdateBookRepository } from '../Repositories/index'
 import { TCreateAndUpdateBook } from '../type'
 
-export class CreateBookService {
+export class UpdateBookService {
   public async execute({ ctx, body }: TCreateAndUpdateBook) {
-    const userStoreValidator = new CreateBookValidator(ctx)
+    const userStoreValidator = new UpdateBookValidator(ctx)
     await validator.validate({
       schema: userStoreValidator.schema,
       data: body,
       messages: new CustomMessages().messages,
     })
 
-    return new CreateBookRepository().handle({ ctx, body })
+    return new UpdateBookRepository().handle({ ctx, body })
   }
 }
