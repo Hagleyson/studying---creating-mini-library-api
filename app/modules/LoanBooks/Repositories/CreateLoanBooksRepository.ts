@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import User from 'App/Models/User'
 import { Exception } from '@adonisjs/core/build/standalone'
 import NotFoundException from 'App/Exceptions/NotFoundException'
@@ -9,14 +8,14 @@ import LoanBook from 'App/Models/LoanBook'
 
 export class CreateLoanBooksRepository {
   public async handle({ ctx, body }: TCreateLoanBook) {
-    const { book_secure_id, user_secure_id, closing_date } = body
+    const { bookSecureId, userSecureId, closingDate } = body
     try {
-      const book = await Book.findBy('secure_id', book_secure_id)
+      const book = await Book.findBy('secure_id', bookSecureId)
       if (!book) {
         throw new NotFoundException('There is no book for this secure id', 404, 'E_NOT_FOUND')
       }
 
-      const user = await User.findBy('secure_id', user_secure_id)
+      const user = await User.findBy('secure_id', userSecureId)
       if (!user) {
         throw new NotFoundException('There is no user for this secure id', 404, 'E_NOT_FOUND')
       }
@@ -32,7 +31,7 @@ export class CreateLoanBooksRepository {
       return await LoanBook.create({
         userId: user.id,
         bookId: book.id,
-        closing_date: moment(closing_date, 'DD/MM/YYYY').toDate(),
+        closing_date: moment(closingDate, 'DD/MM/YYYY').toDate(),
       })
     } catch (error) {
       throw new Exception(

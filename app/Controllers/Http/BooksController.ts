@@ -27,8 +27,8 @@ export default class BooksController {
     return new CreateBookService().execute({ ctx, body })
   }
   public async update(ctx: HttpContextContract) {
-    const { name, actor, edition, genre } = ctx.request.body()
-    return new UpdateBookService().execute({ ctx, body: { name, actor, edition, genre } })
+    const body = ctx.request.body() as BookDTO
+    return new UpdateBookService().execute({ ctx, body })
   }
   public async destroy(ctx: HttpContextContract) {
     const secureId = ctx.request.param('secure_id')

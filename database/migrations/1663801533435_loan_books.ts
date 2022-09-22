@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('secure_id').unique().notNullable()
       table.string('status').notNullable().defaultTo('active')
       table.date('closing_date').notNullable()
+      table.integer('number_renewals').notNullable().defaultTo(0)
       table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
       table
         .integer('book_id')

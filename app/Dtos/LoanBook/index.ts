@@ -1,5 +1,10 @@
 export interface CreateLoanBookDTO {
-  user_secure_id: string
-  book_secure_id: string
-  closing_date: string
+  userSecureId: string
+  bookSecureId: string
+  closingDate: string
+}
+
+export interface UpdateLoanBookDTO {
+  status: 'active' | 'inactive'
+  closingDate: string
 }

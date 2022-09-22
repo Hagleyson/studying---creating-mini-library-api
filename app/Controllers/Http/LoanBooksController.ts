@@ -1,6 +1,6 @@
-import { CreateLoanBookDTO } from './../../Dtos/LoanBook/index'
+import { CreateLoanBookDTO, UpdateLoanBookDTO } from './../../Dtos/LoanBook/index'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { CreateLoanBooksService } from 'App/modules/LoanBooks/service'
+import { CreateLoanBooksService, UpdateLoanBooksService } from 'App/modules/LoanBooks/service'
 
 export default class LoanBooksController {
   public async store(ctx: HttpContextContract) {
@@ -9,5 +9,9 @@ export default class LoanBooksController {
       ctx,
       body,
     })
+  }
+  public async update(ctx: HttpContextContract) {
+    const body = ctx.request.body() as UpdateLoanBookDTO
+    return new UpdateLoanBooksService().execute({ ctx, body })
   }
 }

@@ -8,8 +8,11 @@ export default class LoanBook extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
-  public secure_id: string
+  @column({ columnName: 'secure_id' })
+  public secureId: string
+
+  @column({ columnName: 'number_renewals' })
+  public numberRenewals: number
 
   @column()
   public closing_date: Date
@@ -37,6 +40,6 @@ export default class LoanBook extends BaseModel {
 
   @beforeCreate()
   public static async CreateUUID(model: LoanBook): Promise<void> {
-    model.secure_id = uuidV4()
+    model.secureId = uuidV4()
   }
 }
