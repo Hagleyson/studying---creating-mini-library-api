@@ -4,10 +4,8 @@ import { TCreateAndUpdateBook } from '../type'
 
 export class CreateBookRepository {
   public async handle({ ctx, body }: TCreateAndUpdateBook) {
-    const { name, actor, edition, code } = body
-
     try {
-      await Book.create({ name, actor, edition, code })
+      await Book.create({ ...body })
       return body
     } catch (error) {
       throw new Exception(

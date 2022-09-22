@@ -9,6 +9,7 @@ export class CreateBookValidator {
     actor: schema.string(),
     edition: schema.string(),
     code: schema.string(),
+    genre: schema.string(),
   })
 
   public messages: CustomMessages = {}

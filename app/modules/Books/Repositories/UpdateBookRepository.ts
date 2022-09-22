@@ -5,14 +5,13 @@ import { TCreateAndUpdateBook } from '../type'
 
 export class UpdateBookRepository {
   public async handle({ ctx, body }: TCreateAndUpdateBook) {
-    const { name, actor, edition, code } = body
     try {
       const bookSecureId = ctx.request.param('secure_id')
       const book = await Book.findBy('secure_id', bookSecureId)
       if (!book) {
         throw new NotFoundException('There is no book for this secure id', 404, 'E_NOT_FOUND')
       }
-      book.merge({ name, actor, edition, code })
+      book.merge({ ...body })
       await book.save()
       return book
     } catch (error) {

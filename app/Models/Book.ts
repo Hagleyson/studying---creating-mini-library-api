@@ -23,6 +23,9 @@ export default class Book extends BaseModel {
   @column()
   public code: string
 
+  @column()
+  public genre: string
+
   @hasMany(() => LoanBook, { foreignKey: 'bookId' })
   public book: HasMany<typeof LoanBook>
 

@@ -8,12 +8,12 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class BooksController {
   public async store(ctx: HttpContextContract) {
-    const { name, actor, edition, code } = ctx.request.body()
-    return new CreateBookService().execute({ ctx, body: { name, actor, edition, code } })
+    const { name, actor, edition, code, genre } = ctx.request.body()
+    return new CreateBookService().execute({ ctx, body: { name, actor, edition, code, genre } })
   }
   public async update(ctx: HttpContextContract) {
-    const { name, actor, edition } = ctx.request.body()
-    return new UpdateBookService().execute({ ctx, body: { name, actor, edition } })
+    const { name, actor, edition, genre } = ctx.request.body()
+    return new UpdateBookService().execute({ ctx, body: { name, actor, edition, genre } })
   }
   public async destroy(ctx: HttpContextContract) {
     const secureId = ctx.request.param('secure_id')

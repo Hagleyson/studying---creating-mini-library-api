@@ -3,4 +3,5 @@ export interface BookDTO {
   actor: string
   edition: string
   code?: string
+  genre: string
 }
