@@ -12,6 +12,9 @@ export default class Book extends BaseModel {
   public secure_id: string
 
   @column()
+  public name: string
+
+  @column()
   public actor: string
 
   @column()
