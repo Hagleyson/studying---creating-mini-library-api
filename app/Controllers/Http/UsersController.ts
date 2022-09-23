@@ -8,8 +8,8 @@ import {
 import { UserDTO } from 'App/Dtos'
 
 export default class UsersController {
-  public async index({ request }: HttpContextContract) {
-    return new ListAllUsersServices().execute(request.all())
+  public async index(ctx: HttpContextContract) {
+    return new ListAllUsersServices().execute({ ctx })
   }
 
   public async update(ctx: HttpContextContract) {
@@ -24,6 +24,6 @@ export default class UsersController {
 
   public async destroy(ctx: HttpContextContract) {
     const secureId = ctx.request.param('id')
-    return new DeleteUserService().execute({ secureId })
+    return new DeleteUserService().execute({ ctx, secureId })
   }
 }

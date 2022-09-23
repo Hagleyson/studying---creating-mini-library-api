@@ -3,8 +3,9 @@ import { UserDTO } from 'App/Dtos'
 
 export type TUser = {
   ctx: HttpContextContract
-  body: UserDTO
+  body?: UserDTO
 }
 export type TDeleteUser = {
+  ctx: HttpContextContract
   secureId: string
 }

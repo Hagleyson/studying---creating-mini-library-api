@@ -4,13 +4,14 @@ import User from 'App/Models/User'
 import NotFoundException from 'App/Exceptions/NotFoundException'
 
 export class DeleteUserRepository {
-  public async handle({ secureId }: TDeleteUser) {
+  public async handle({ ctx, secureId }: TDeleteUser) {
     try {
       const user = await User.query().where('secure_id', secureId).first()
 
       if (!user) {
         throw new NotFoundException('There is no user for this secure id', 404, 'E_NOT_FOUND')
       }
+      await ctx.bouncer.authorize('user', user)
       await user.delete()
       return user
     } catch (error) {
