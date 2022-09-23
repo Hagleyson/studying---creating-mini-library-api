@@ -56,7 +56,7 @@ export default class User extends BaseModel {
   public tokens: HasMany<typeof LinkToken>
 
   @hasMany(() => LoanBook, { foreignKey: 'userId' })
-  public user: HasMany<typeof LoanBook>
+  public loanBook: HasMany<typeof LoanBook>
 
   @beforeCreate()
   public static async CreateUUID(model: User): Promise<void> {
