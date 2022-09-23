@@ -15,6 +15,7 @@ export class ListAllLoanBooksByBooksRepository {
     status,
     closingDate,
     bookName,
+    ctx,
   }: TListAllLoanBooksByBook) {
     try {
       const book = await Book.findBy('secure_id', bookSecureId)
@@ -26,6 +27,7 @@ export class ListAllLoanBooksByBooksRepository {
         const count = await LoanBook.query().pojo<{ count: number }>().count('id as count')
         perPage = count[0].count
       }
+      await ctx.bouncer.authorize('userTypeAdm')
 
       return await LoanBook.query()
         .preload('user')

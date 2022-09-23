@@ -15,6 +15,7 @@ export type TListAllLoanBooksByPerson = {
   page: number
   perPage: number
   userSecureId: string
+  ctx: HttpContextContract
 } & ListBooksDTO
 
 export type TListAllLoanBooksByBook = {
@@ -22,4 +23,5 @@ export type TListAllLoanBooksByBook = {
   page: number
   perPage: number
   bookSecureId: string
+  ctx: HttpContextContract
 } & ListBooksDTO

@@ -19,7 +19,7 @@ export class CreateLoanBooksRepository {
       if (!user) {
         throw new NotFoundException('There is no user for this secure id', 404, 'E_NOT_FOUND')
       }
-
+      await ctx.bouncer.authorize('loanBooks', user)
       const isBorrowedBook = await LoanBook.query()
         .where('book_id', book.id)
         .andWhere('status', 'active')

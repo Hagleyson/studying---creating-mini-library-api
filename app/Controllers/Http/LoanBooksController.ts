@@ -30,6 +30,7 @@ export default class LoanBooksController {
       status,
       closingDate,
       bookName,
+      ctx,
     })
   }
   public async ListAllByBook(ctx: HttpContextContract) {
@@ -43,6 +44,7 @@ export default class LoanBooksController {
       status,
       closingDate,
       bookName,
+      ctx,
     })
   }
 }

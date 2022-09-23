@@ -11,13 +11,13 @@ export class UpdateLoanBooksRepository {
     const secureId = ctx.request.param('secureId')
     const { status, closingDate } = body
     try {
-      const loanBook = await LoanBook.findBy('secure_id', secureId)
+      const loanBook = await LoanBook.query().where('secure_id', secureId).preload('user').first()
       if (!loanBook) {
         throw new NotFoundException('There is no loanBook for this secure id', 404, 'E_NOT_FOUND')
       }
       let loanRenewal = loanBook.numberRenewals
-      console.log(moment(loanBook.closing_date).format('DD/MM/YYYY'))
-      console.log(closingDate)
+      await ctx.bouncer.authorize('loanBooks', loanBook.user)
+
       if (moment(loanBook.closing_date).format('DD/MM/YYYY') !== closingDate) {
         loanRenewal += 1
       }
