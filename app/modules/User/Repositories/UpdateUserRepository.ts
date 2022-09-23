@@ -9,10 +9,11 @@ export class UpdateUserRepository {
     const secureId = ctx.request.param('id')
     try {
       const user = await User.findBy('secure_id', secureId)
-
       if (!user) {
         throw new NotFoundException('There is no user for this secure id', 404, 'E_NOT_FOUND')
       }
+      await ctx.bouncer.authorize('updateUser', user)
+
       let newUser = { ...body }
       if (body.birth_date) {
         newUser = { ...newUser, birth_date: moment(body.birth_date, 'DD/MM/YYYY').toDate() }
