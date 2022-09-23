@@ -10,7 +10,6 @@ export class CreateUserRepository {
         birth_date: moment(body.birth_date, 'DD/MM/YYYY').toDate(),
       })
     } catch (error) {
-      console.log(error.sqlMessage)
       throw new Exception(
         error.message || 'Internal Server Error',
         error.status || 500,

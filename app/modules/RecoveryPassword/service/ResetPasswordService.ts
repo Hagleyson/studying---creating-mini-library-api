@@ -7,7 +7,6 @@ import { TRecoveryPassword } from '../type'
 
 export class ResetPasswordService {
   public async execute({ ctx, body }: TRecoveryPassword) {
-    console.log('body', body)
     const userStoreValidator = new ResetPasswordValidator(ctx)
     await validator.validate({
       schema: userStoreValidator.schema,

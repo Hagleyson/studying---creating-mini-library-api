@@ -6,15 +6,12 @@ import User from 'App/Models/User'
 import TokenExpiredException from 'App/Exceptions/TokenExpiredException'
 export class ResetPasswordRepository {
   public async handle({ ctx, body }: TRecoveryPassword) {
-    console.log('repository ', body.token)
-
     try {
       const userByToken = await User.query()
         .preload('tokens')
         .whereHas('tokens', (tokens) => tokens.where('token', body.token))
         .first()
 
-      console.log(userByToken)
       if (!userByToken) {
         throw new NotFoundException('Token not found', 404, 'E_NOT_FOUND')
       }

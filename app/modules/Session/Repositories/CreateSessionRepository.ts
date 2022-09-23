@@ -7,7 +7,6 @@ export class CreateSessionRepository {
     try {
       return await ctx.auth.use('api').attempt(email, password, { expiresIn: '2hours' })
     } catch (error) {
-      console.log(error.sqlMessage)
       throw new Exception(
         error.message || 'Internal Server Error',
         error.status || 500,
