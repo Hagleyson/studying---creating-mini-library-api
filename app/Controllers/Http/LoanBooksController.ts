@@ -4,6 +4,7 @@ import {
   CreateLoanBooksService,
   UpdateLoanBooksService,
   ListAllLoanBookByUserService,
+  ListAllLoanBookByBookService,
 } from 'App/modules/LoanBooks/service'
 
 export default class LoanBooksController {
@@ -26,6 +27,19 @@ export default class LoanBooksController {
       page,
       perPage,
       userSecureId,
+      status,
+      closingDate,
+      bookName,
+    })
+  }
+  public async ListAllByBook(ctx: HttpContextContract) {
+    const { noPaginate, page, perPage, bookSecureId, status, closingDate, bookName } =
+      ctx.request.qs()
+    return new ListAllLoanBookByBookService().execute({
+      noPaginate,
+      page,
+      perPage,
+      bookSecureId,
       status,
       closingDate,
       bookName,

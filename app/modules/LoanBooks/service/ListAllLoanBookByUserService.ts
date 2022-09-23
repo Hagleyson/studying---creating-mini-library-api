@@ -1,4 +1,4 @@
-import { ListAllLoanBookByUserRepository } from '../Repositories/ListAllLoanBooksByUserRepository'
+import { ListAllLoanBookByUserRepository } from '../Repositories/index'
 
 import { TListAllLoanBooksByPerson } from '../type'
 

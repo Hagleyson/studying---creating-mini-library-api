@@ -21,5 +21,5 @@ export type TListAllLoanBooksByBook = {
   noPaginate?: boolean
   page: number
   perPage: number
-  personSecureId: string
+  bookSecureId: string
 } & ListBooksDTO
