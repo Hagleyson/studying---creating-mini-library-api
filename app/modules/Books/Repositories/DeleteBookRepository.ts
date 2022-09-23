@@ -4,8 +4,10 @@ import Book from 'App/Models/Book'
 import { TDeleteBook } from '../type'
 
 export class DeleteBookRepository {
-  public async handle({ secureId }: TDeleteBook) {
+  public async handle({ ctx, secureId }: TDeleteBook) {
     try {
+      await ctx.bouncer.authorize('userTypeAdm')
+
       const book = await Book.findBy('secure_id', secureId)
       if (!book) {
         throw new NotFoundException('There is no book for this secure id', 404, 'E_NOT_FOUND')

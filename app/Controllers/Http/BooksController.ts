@@ -32,6 +32,6 @@ export default class BooksController {
   }
   public async destroy(ctx: HttpContextContract) {
     const secureId = ctx.request.param('secure_id')
-    return new DeleteBookService().execute({ secureId })
+    return new DeleteBookService().execute({ ctx, secureId })
   }
 }

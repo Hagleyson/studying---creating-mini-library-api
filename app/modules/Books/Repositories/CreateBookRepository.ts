@@ -5,6 +5,8 @@ import { TCreateAndUpdateBook } from '../type'
 export class CreateBookRepository {
   public async handle({ ctx, body }: TCreateAndUpdateBook) {
     try {
+      await ctx.bouncer.authorize('userTypeAdm')
+
       return await Book.create({ ...body })
     } catch (error) {
       throw new Exception(

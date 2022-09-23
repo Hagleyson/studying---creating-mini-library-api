@@ -6,6 +6,8 @@ import { TCreateAndUpdateBook } from '../type'
 export class UpdateBookRepository {
   public async handle({ ctx, body }: TCreateAndUpdateBook) {
     try {
+      await ctx.bouncer.authorize('userTypeAdm')
+
       const bookSecureId = ctx.request.param('secure_id')
       const book = await Book.findBy('secure_id', bookSecureId)
       if (!book) {

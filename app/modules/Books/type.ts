@@ -7,6 +7,8 @@ export type TCreateAndUpdateBook = {
 }
 
 export type TDeleteBook = {
+  ctx: HttpContextContract
+
   secureId: string
 }
 export type TListAllBooks = {
